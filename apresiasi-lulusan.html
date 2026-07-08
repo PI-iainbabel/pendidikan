@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pengakuan Kompetensi Lulusan · Psikologi Islam</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        navy: {
+                            50: '#E8EDF8', 100: '#C5D2F0', 200: '#9DB5E8',
+                            300: '#6F95E0', 400: '#4F7FD8', 500: '#2A5CC4',
+                            600: '#1A3F8F', 700: '#122B6A', 800: '#0B1D45',
+                            900: '#060F28', 950: '#030714',
+                        },
+                        gold: '#D4AF37',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #060F28;
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+
+        .glass-nav {
+            background: rgba(11, 29, 69, 0.7);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(79, 143, 255, 0.15);
+        }
+
+        .btn-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            border: 1px solid transparent;
+        }
+        .btn-nav-home {
+            background: rgba(255, 255, 255, 0.04);
+            color: #94a3b8;
+            border-color: rgba(255, 255, 255, 0.06);
+        }
+        .btn-nav-home:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+        .btn-nav-tree {
+            background: rgba(82, 183, 136, 0.06);
+            color: #52B788;
+            border-color: rgba(82, 183, 136, 0.1);
+        }
+        .btn-nav-tree:hover {
+            background: rgba(82, 183, 136, 0.12);
+            border-color: #52B788;
+            transform: translateY(-2px);
+        }
+        .btn-nav-drive {
+            background: rgba(26, 115, 232, 0.08);
+            color: #4F7FD8;
+            border-color: rgba(26, 115, 232, 0.1);
+        }
+        .btn-nav-drive:hover {
+            background: rgba(26, 115, 232, 0.15);
+            border-color: #4F7FD8;
+            transform: translateY(-2px);
+        }
+
+        .breadcrumb {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px 4px;
+            font-size: 0.8rem;
+            padding: 4px 0;
+        }
+        .breadcrumb a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .breadcrumb a:hover {
+            color: #D4AF37;
+        }
+        .breadcrumb .separator {
+            color: #475569;
+            font-size: 0.6rem;
+            margin: 0 2px;
+        }
+        .breadcrumb .current {
+            color: #e2e8f0;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .breadcrumb .current i {
+            color: #D4AF37;
+            font-size: 0.9rem;
+        }
+
+        .card-glass {
+            background: rgba(11, 29, 69, 0.4);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+        .card-glass:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+        .stat-card {
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .stat-card:hover {
+            transform: translateY(-6px) scale(1.02);
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .table-wrap table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.7rem;
+        }
+        .table-wrap thead {
+            background: rgba(11, 29, 69, 0.6);
+            border-bottom: 2px solid rgba(212, 175, 55, 0.2);
+        }
+        .table-wrap thead th {
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 700;
+            color: #D4AF37;
+            text-transform: uppercase;
+            font-size: 0.6rem;
+            letter-spacing: 0.04em;
+            white-space: nowrap;
+        }
+        .table-wrap tbody tr {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            transition: all 0.2s ease;
+        }
+        .table-wrap tbody tr:hover {
+            background: rgba(212, 175, 55, 0.05);
+        }
+        .table-wrap tbody td {
+            padding: 8px 12px;
+            color: #cbd5e1;
+            vertical-align: middle;
+        }
+        .table-wrap tbody td:first-child {
+            font-weight: 600;
+            color: #e2e8f0;
+            text-align: center;
+        }
+        .table-wrap tfoot tr {
+            background: rgba(11, 29, 69, 0.5);
+            border-top: 2px solid rgba(212, 175, 55, 0.3);
+        }
+        .table-wrap tfoot td {
+            padding: 10px 12px;
+            color: #D4AF37;
+            font-weight: 700;
+        }
+
+        .badge-status {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.6rem;
+            font-weight: 600;
+        }
+        .badge-nasional {
+            background: rgba(52, 211, 153, 0.12);
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.15);
+        }
+        .badge-wilayah {
+            background: rgba(251, 191, 36, 0.12);
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.15);
+        }
+        .badge-internasional {
+            background: rgba(96, 165, 250, 0.12);
+            color: #60a5fa;
+            border: 1px solid rgba(96, 165, 250, 0.15);
+        }
+
+        .badge-tema {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            background: rgba(212, 175, 55, 0.08);
+            color: #D4AF37;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .filter-select {
+            background-color: rgba(11, 29, 69, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #cbd5e1;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .filter-select:focus {
+            border-color: #D4AF37;
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.15);
+        }
+        .filter-select option {
+            background-color: #0B1D45;
+            color: #e2e8f0;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 40px;
+        }
+
+        .chart-bar {
+            height: 8px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            position: relative;
+        }
+        .chart-bar .fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.8s ease;
+        }
+        .chart-bar .fill.gold { background: linear-gradient(90deg, #D4AF37, #f5d76e); }
+        .chart-bar .fill.emerald { background: linear-gradient(90deg, #34d399, #6ee7b7); }
+        .chart-bar .fill.amber { background: linear-gradient(90deg, #fbbf24, #fcd34d); }
+        .chart-bar .fill.sky { background: linear-gradient(90deg, #60a5fa, #93c5fd); }
+        .chart-bar .fill.rose { background: linear-gradient(90deg, #fb7185, #fda4af); }
+        .chart-bar .fill.purple { background: linear-gradient(90deg, #a78bfa, #c4b5fd); }
+
+        .stat-ringkasan {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+        }
+        .stat-ringkasan .item {
+            background: rgba(11, 29, 69, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 12px 16px;
+            text-align: center;
+        }
+        .stat-ringkasan .item .number {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .stat-ringkasan .item .label {
+            font-size: 0.6rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        @media (max-width: 640px) {
+            .main-content { padding: 16px; }
+            .table-wrap table { font-size: 0.6rem; }
+            .table-wrap thead th, .table-wrap tbody td { padding: 4px 6px; }
+            .filter-select { font-size: 0.6rem; padding: 2px 8px; }
+            .stat-ringkasan { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media print {
+            .no-print { display: none !important; }
+            body { background: #fff; color: #000; }
+            .card-glass { background: #f1f5f9; border-color: #cbd5e1; }
+            .stat-card { background: #f1f5f9; border-color: #cbd5e1; }
+            .table-wrap { border-color: #cbd5e1; }
+            .table-wrap thead { background: #e2e8f0; }
+            .table-wrap thead th { color: #1e293b; }
+            .table-wrap tbody td { color: #1e293b; }
+            .table-wrap tbody tr { border-color: #e2e8f0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================================== -->
+    <!-- NAVBAR DENGAN BREADCRUMB                                   -->
+    <!-- ========================================================== -->
+    <nav class="glass-nav fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between py-3 gap-2">
+
+                <div class="flex items-center gap-4 flex-wrap">
+                    <div class="breadcrumb">
+                        <a href="https://pi-iainbabel.github.io/psychosophia-hub/" title="Kembali ke Home">
+                            <i class="fas fa-home"></i> Home
+                        </a>
+                        <span class="separator"><i class="fas fa-chevron-right"></i></span>
+                        <a href="https://pi-iainbabel.github.io/psychosophia-hub/struktur-konten.html" title="Kembali ke Relevansi Pendidikan">
+                            <i class="fas fa-graduation-cap"></i> Pendidikan & Akademik
+                        </a>
+                        <span class="separator"><i class="fas fa-chevron-right"></i></span>
+                        <span class="current">
+                            <i class="fas fa-trophy"></i> Pengakuan Kompetensi Lulusan
+                        </span>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2 flex-wrap">
+                    <a href="https://drive.google.com/drive/u/1/folders/1rH36enA8aLBSwegw9VO1BupsmIGzG6a6" 
+                       target="_blank" 
+                       class="btn-nav btn-nav-drive text-xs">
+                        <i class="fab fa-google-drive"></i> Drive Bukti
+                    </a>
+                    <a href="https://pi-iainbabel.github.io/psychosophia-hub/struktur-konten.html" class="btn-nav btn-nav-tree" title="Pohon Pengetahuan">
+                        <i class="fas fa-tree"></i> Tree
+                    </a>
+                    <a href="https://pi-iainbabel.github.io/psychosophia-hub/" class="btn-nav btn-nav-home" title="Kembali ke Home">
+                        <i class="fas fa-arrow-left"></i> Home
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-20"></div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-content">
+
+        <!-- ===== HERO ===== -->
+        <div class="mb-8 text-center">
+            <div class="inline-block px-4 py-1 rounded-full bg-gold/10 border border-gold/20 text-gold text-xs font-semibold tracking-wider mb-4">
+                <i class="fas fa-trophy mr-2"></i> PENGARAHAN & APRESIASI KOMPETENSI LULUSAN
+            </div>
+            <h1 class="font-heading font-extrabold text-3xl sm:text-4xl text-white flex items-center justify-center gap-3">
+                <i class="fas fa-award text-gold"></i> Pengakuan Kompetensi Lulusan
+            </h1>
+            <p class="mt-3 text-slate-400 max-w-2xl mx-auto text-sm">
+                Rekapitulasi pengakuan dan apresiasi yang diterima lulusan Prodi Psikologi Islam periode 2022–2026
+            </p>
+            <div class="mt-4 flex flex-wrap justify-center gap-3 text-xs">
+                <span class="px-4 py-1.5 rounded-full bg-navy-800/60 border border-white/5 text-slate-300">
+                    <i class="fas fa-book text-gold mr-1.5"></i> 4 Publikasi (3 Buku + 1 Jurnal Sinta 2)
+                </span>
+                <span class="px-4 py-1.5 rounded-full bg-navy-800/60 border border-white/5 text-slate-300">
+                    <i class="fas fa-copyright text-gold mr-1.5"></i> 2 HKI
+                </span>
+                <span class="px-4 py-1.5 rounded-full bg-emerald-400/20 border border-emerald-400/30 text-emerald-300">
+                    <i class="fas fa-graduation-cap mr-1.5"></i> 4 Sertifikasi/S2
+                </span>
+                <span class="px-4 py-1.5 rounded-full bg-purple-400/20 border border-purple-400/30 text-purple-300">
+                    <i class="fas fa-briefcase mr-1.5"></i> 7 Pengakuan Dunia Kerja
+                </span>
+                <span class="px-4 py-1.5 rounded-full bg-sky-400/20 border border-sky-400/30 text-sky-300">
+                    <i class="fas fa-medal mr-1.5"></i> 1 Kompetisi
+                </span>
+                <span class="px-4 py-1.5 rounded-full bg-rose-400/20 border border-rose-400/30 text-rose-300">
+                    <i class="fas fa-hand-holding-heart mr-1.5"></i> 2 Sertifikasi Kompetensi
+                </span>
+            </div>
+        </div>
+
+        <!-- ===== STATISTIK UTAMA ===== -->
+        <section class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+            <div class="stat-card bg-navy-800/30 rounded-xl p-4 text-center border border-white/5">
+                <div class="text-2xl font-bold text-gold">20</div>
+                <div class="text-xs text-slate-400">Total Pengakuan</div>
+            </div>
+            <div class="stat-card bg-navy-800/30 rounded-xl p-4 text-center border border-white/5">
+                <div class="text-2xl font-bold text-emerald-400">18</div>
+                <div class="text-xs text-slate-400">Tingkat Nasional</div>
+            </div>
+            <div class="stat-card bg-navy-800/30 rounded-xl p-4 text-center border border-white/5">
+                <div class="text-2xl font-bold text-amber-400">2</div>
+                <div class="text-xs text-slate-400">Tingkat Wilayah</div>
+            </div>
+            <div class="stat-card bg-navy-800/30 rounded-xl p-4 text-center border border-white/5">
+                <div class="text-2xl font-bold text-sky-400">0</div>
+                <div class="text-xs text-slate-400">Tingkat Internasional</div>
+            </div>
+        </section>
+
+        <!-- ===== VISUAL DATA ===== -->
+        <section class="card-glass p-6 border-gold/10 mb-8">
+            <h3 class="font-heading font-bold text-white text-sm mb-4 flex items-center gap-2">
+                <i class="fas fa-chart-pie text-gold"></i> Ringkasan Capaian Kompetensi Lulusan
+            </h3>
+
+            <div class="stat-ringkasan mb-6">
+                <div class="item">
+                    <div class="number text-gold">20</div>
+                    <div class="label">Total Pengakuan</div>
+                </div>
+                <div class="item">
+                    <div class="number text-emerald-400">18</div>
+                    <div class="label">Nasional</div>
+                </div>
+                <div class="item">
+                    <div class="number text-amber-400">2</div>
+                    <div class="label">Wilayah</div>
+                </div>
+                <div class="item">
+                    <div class="number text-sky-400">0</div>
+                    <div class="label">Internasional</div>
+                </div>
+                <div class="item" style="border-color:rgba(212,175,55,0.2);">
+                    <div class="number text-gold">6</div>
+                    <div class="label">Kategori Bidang</div>
+                </div>
+                <div class="item" style="border-color:rgba(52,211,153,0.2);">
+                    <div class="number text-emerald-400">✅</div>
+                    <div class="label">Status: Melampaui Target</div>
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <p class="text-xs text-slate-400 mb-2">Distribusi Pengakuan per Kategori</p>
+
+                <div>
+                    <div class="flex justify-between text-xs text-slate-400">
+                        <span>📚 Publikasi (Buku + Jurnal)</span>
+                        <span>4</span>
+                    </div>
+                    <div class="chart-bar"><div class="fill gold" style="width:80%;"></div></div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between text-xs text-slate-400">
+                        <span>©️ HKI</span>
+                        <span>2</span>
+                    </div>
+                    <div class="chart-bar"><div class="fill purple" style="width:40%;"></div></div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between text-xs text-slate-400">
+                        <span>🎓 Sertifikasi Profesi/S2</span>
+                        <span>4</span>
+                    </div>
+                    <div class="chart-bar"><div class="fill emerald" style="width:80%;"></div></div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between text-xs text-slate-400">
+                        <span>💼 Pengakuan Dunia Kerja</span>
+                        <span>7</span>
+                    </div>
+                    <div class="chart-bar"><div class="fill amber" style="width:100%;"></div></div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between text-xs text-slate-400">
+                        <span>🏅 Kompetisi</span>
+                        <span>1</span>
+                    </div>
+                    <div class="chart-bar"><div class="fill sky" style="width:20%;"></div></div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between text-xs text-slate-400">
+                        <span>🩺 Sertifikasi Kompetensi</span>
+                        <span>2</span>
+                    </div>
+                    <div class="chart-bar"><div class="fill rose" style="width:40%;"></div></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===== TABEL PENGARAHAN & APRESIASI ===== -->
+        <section class="card-glass p-6 border-gold/10 mb-8">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                <div>
+                    <h2 class="font-heading font-bold text-xl text-white flex items-center gap-2">
+                        <i class="fas fa-list text-gold"></i> Tabel Pengajuan Kompetensi Lulusan
+                        <span class="text-sm text-slate-400 font-normal">— Pengakuan & Apresiasi</span>
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-0.5">Data pengakuan kompetensi lulusan 2022–2026</p>
+                </div>
+                <div class="flex flex-wrap items-center gap-2">
+                    <select id="filterKategori" onchange="renderTable()" class="filter-select">
+                        <option value="all">Semua Kategori</option>
+                        <option value="publikasi">Publikasi</option>
+                        <option value="hki">HKI</option>
+                        <option value="sertifikasi">Sertifikasi/S2</option>
+                        <option value="kerja">Pengakuan Dunia Kerja</option>
+                        <option value="kompetisi">Kompetisi</option>
+                        <option value="sertifikasi_kompetensi">Sertifikasi Kompetensi</option>
+                    </select>
+                    <select id="filterTingkat" onchange="renderTable()" class="filter-select">
+                        <option value="all">Semua Tingkat</option>
+                        <option value="nasional">Nasional</option>
+                        <option value="wilayah">Wilayah</option>
+                        <option value="internasional">Internasional</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-4 p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg text-xs text-amber-400 flex items-center gap-2">
+                <i class="fas fa-info-circle"></i>
+                <span>Data pengakuan kompetensi lulusan berdasarkan hasil tracer study dan pelacakan alumni 2022–2026.</span>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="w-12 text-center">No</th>
+                            <th class="text-left min-w-[120px]">Nama</th>
+                            <th class="text-left min-w-[200px]">Bidang Pengakuan/Apresiasi</th>
+                            <th class="text-left min-w-[160px]">Lembaga/Instansi Terkait</th>
+                            <th class="text-center min-w-[60px]">Wilayah</th>
+                            <th class="text-center min-w-[60px]">Nasional</th>
+                            <th class="text-center min-w-[60px]">Internasional</th>
+                            <th class="text-center min-w-[60px]">Tahun</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- diisi oleh JavaScript -->
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="8" class="text-center text-xs text-slate-500">
+                                <i class="fas fa-database mr-1"></i> Total <span id="totalData">0</span> entri tercatat
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+
+        <!-- ===== RINGKASAN AGREGAT ===== -->
+        <section class="card-glass p-6 border-gold/10 mb-8">
+            <h3 class="font-heading font-bold text-white text-sm mb-3 flex items-center gap-2">
+                <i class="fas fa-layer-group text-gold"></i> Ringkasan Agregat
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="bg-navy-800/30 rounded-xl p-4 border border-white/5">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xl">📚</span>
+                        <div>
+                            <div class="text-xs text-slate-400">Publikasi</div>
+                            <div class="text-lg font-bold text-gold">4</div>
+                            <div class="text-[10px] text-slate-500">3 Buku + 1 Jurnal Sinta 2</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-navy-800/30 rounded-xl p-4 border border-white/5">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xl">©️</span>
+                        <div>
+                            <div class="text-xs text-slate-400">Sertifikat HKI</div>
+                            <div class="text-lg font-bold text-purple-400">2</div>
+                            <div class="text-[10px] text-slate-500">Modul Motivasi &amp; Modul Kampung Wisata</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-navy-800/30 rounded-xl p-4 border border-white/5">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xl">🎓</span>
+                        <div>
+                            <div class="text-xs text-slate-400">Sertifikasi Profesi/S2</div>
+                            <div class="text-lg font-bold text-emerald-400">4</div>
+                            <div class="text-[10px] text-slate-500">Profesi Psikolog (Nabiela), S2 (Ika, Siti, Demisa)</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-navy-800/30 rounded-xl p-4 border border-white/5">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xl">💼</span>
+                        <div>
+                            <div class="text-xs text-slate-400">Pengakuan dari Dunia Kerja</div>
+                            <div class="text-lg font-bold text-amber-400">7</div>
+                            <div class="text-[10px] text-slate-500">Narasumber, Penghargaan, Penugasan di MHIS, Wakil Kepala Sekolah</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-navy-800/30 rounded-xl p-4 border border-white/5">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xl">🏅</span>
+                        <div>
+                            <div class="text-xs text-slate-400">Kompetisi/Perlombaan</div>
+                            <div class="text-lg font-bold text-sky-400">1</div>
+                            <div class="text-[10px] text-slate-500">Medali Emas KTIH</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-navy-800/30 rounded-xl p-4 border border-rose-400/30">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xl">🩺</span>
+                        <div>
+                            <div class="text-xs text-slate-400">Sertifikasi Kompetensi</div>
+                            <div class="text-lg font-bold text-rose-400">2</div>
+                            <div class="text-[10px] text-slate-500">Terapi Perilaku ABK, Montessori Sensorial</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-navy-800/30 rounded-xl p-4 border border-gold/20 col-span-1 sm:col-span-2 lg:col-span-3">
+                    <div class="flex items-center gap-3 justify-center">
+                        <span class="text-xl">📊</span>
+                        <div>
+                            <div class="text-xs text-slate-400">Total</div>
+                            <div class="text-lg font-bold text-gold text-center">20</div>
+                            <div class="text-[10px] text-slate-500 text-center">Seluruh entri tercatat</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== ANALISIS NARATIF ===== -->
+        <section class="bg-gradient-to-r from-gold/10 to-gold/5 border border-gold/20 rounded-2xl p-6 mb-8">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="text-2xl">📝</span>
+                <div>
+                    <h3 class="font-heading font-bold text-white text-sm">Analisis Pengakuan dan Apresiasi Kompetensi Lulusan</h3>
+                    <p class="text-xs text-slate-400">Ringkasan berbasis data pengakuan 2022–2026</p>
+                </div>
+            </div>
+            <div class="space-y-4 text-sm text-slate-300 leading-relaxed">
+
+                <p>
+                    Prodi Psikologi Islam telah melakukan pelacakan terhadap pengakuan dan apresiasi yang diterima oleh lulusan dalam tiga tahun terakhir (2022–2026) sebagai bagian dari upaya mengukur relevansi kompetensi lulusan dengan kebutuhan masyarakat dan dunia kerja. Berdasarkan data yang berhasil dihimpun, tercatat sebanyak <strong class="text-gold">20 pengakuan dan apresiasi</strong> yang diterima oleh lulusan Prodi Psikologi Islam, yang mencakup berbagai bidang kompetensi sesuai dengan fokus diferensiasi misi prodi, yaitu pengembangan psikologi berbasis nilai-nilai keislaman dan pemberdayaan masyarakat.
+                </p>
+
+                <p>
+                    <strong class="text-gold">Capaian Pengakuan dan Apresiasi</strong>
+                </p>
+
+                <p>
+                    <strong class="text-gold">1. Publikasi Ilmiah:</strong>
+                    Lulusan telah menghasilkan <strong class="text-white">4 publikasi</strong> yang terdiri dari 3 buku ber-ISBN dan 1 artikel jurnal nasional terakreditasi Sinta 2. Buku yang diterbitkan antara lain <em>"Corona dan Sebuah Pembelajaran Berharga"</em> (2022) oleh Siti Fatimah, <em>"EMPPU PEMETIK DUKA"</em> oleh Demisa Nurhasanah, serta <em>"Sekarung Kisah di Balik Cover"</em> oleh Antika dan kawan-kawan. Capaian publikasi jurnal Sinta 2 diperoleh melalui artikel <strong class="text-white">"Bujang: The Social Representation of Gen Z Masculinity in Bangka"</strong> yang terbit di <strong class="text-white">PALASTREN: Jurnal Studi Gender</strong> (Vol. 18 No. 2, 2025) oleh Oktarizal Drianus, Diah Meitikasari, Rr. Rina Antasari, Shilpa Shetty Tri Syafitri, dan Siti Nuraisah. Publikasi ini menunjukkan kemampuan lulusan dalam menghasilkan karya ilmiah yang diakui secara nasional.
+                </p>
+
+                <p>
+                    <strong class="text-gold">2. Kekayaan Intelektual:</strong>
+                    Lulusan juga memperoleh <strong class="text-white">dua sertifikat Hak Cipta (HKI)</strong> dari Kementerian Hukum dan HAM RI atas pengembangan modul pelatihan motivasi dan modul pelatihan kampung wisata, yang menunjukkan kemampuan lulusan dalam menciptakan produk inovatif berbasis pemberdayaan masyarakat.
+                </p>
+
+                <p>
+                    <strong class="text-gold">3. Pendidikan Lanjutan dan Sertifikasi Profesi:</strong>
+                    Lulusan Prodi Psikologi Islam menunjukkan capaian yang membanggakan. Nabiela diterima dalam <strong class="text-white">Program Profesi Psikolog</strong> di Universitas Sumatera Utara pada tahun 2026. Sementara itu, <strong class="text-white">tiga lulusan</strong> lainnya berhasil melanjutkan pendidikan ke jenjang magister, yaitu Ika Agusti (Universitas Persada Indonesia YAI Jakarta, 2022), Siti Hafsoh (Universitas Muhammadiyah Malang, 2023), dan Demisa Nurhasanah (Universitas Ahmad Dahlan, 2024). Capaian ini menunjukkan bahwa lulusan prodi memiliki kompetensi yang diakui dan mampu bersaing di perguruan tinggi nasional.
+                </p>
+
+                <p>
+                    <strong class="text-gold">4. Pengakuan dari Dunia Kerja dan Institusi Mitra:</strong>
+                    Lulusan Mutiara Andini menerima berbagai apresiasi dari <strong class="text-white">Mutiara Harapan Islamic School (MHIS) Bangka</strong>, antara lain sebagai Narasumber Puber Talk (Konseling Remaja), penerima penghargaan <em>Most Humble Teacher</em>, pemateri Seminar Inklusif untuk Guru, penugasan sebagai Junior High Guidance Counselor untuk konseling anak berkebutuhan khusus, serta penugasan sebagai Tim Observasi Penerimaan Siswa. Selain itu, Mutiara Andini juga meraih <strong class="text-white">Medali Emas</strong> dalam Kompetisi Teacher Inovatif dan Hebat (KTIH) yang diselenggarakan oleh STIQ pada tahun 2025.
+                </p>
+
+                <p>
+                    <strong class="text-gold">5. Sertifikasi Kompetensi Tambahan:</strong>
+                    Lulusan <strong class="text-white">Shilpa Shetty Tri Syafitri</strong> memperoleh dua sertifikasi kompetensi pada tahun 2023, yaitu <strong class="text-white">"Terapi Perilaku Fungsi Bahasa ABK"</strong> dari Alinea Psychological Services &amp; Puzzle-A, serta <strong class="text-white">"Kompetensi Montessori Sensorial at Home"</strong> dari Jejak Jemari.
+                </p>
+
+                <p>
+                    <strong class="text-gold">6. Pengakuan Baru dari Dunia Kerja:</strong>
+                    Lulusan <strong class="text-white">Ika Agusti</strong> pada tahun 2025 dipercaya sebagai <strong class="text-white">Wakil Kepala Sekolah di YPAC Pangkalpinang</strong>, sebuah lembaga pendidikan bagi anak berkebutuhan khusus. Penugasan ini menunjukkan kepercayaan institusi terhadap kompetensi lulusan dalam bidang manajemen pendidikan dan pelayanan anak berkebutuhan khusus, yang sejalan dengan misi prodi dalam pengembangan psikologi berbasis pemberdayaan masyarakat.
+                </p>
+
+                <p>
+                    Demisa Nurhasanah juga menerima pengakuan sebagai <strong class="text-white">Anggota Pelaksana Program Pemberdayaan Umat (PRODAMAT)</strong> yang diselenggarakan oleh Fakultas Psikologi Universitas Ahmad Dahlan pada tahun 2025, yang menunjukkan kemampuan lulusan dalam berkontribusi pada program pemberdayaan masyarakat berbasis psikologi.
+                </p>
+
+                <p>
+                    <strong class="text-gold">Pemenuhan Indikator Butir 14</strong>
+                </p>
+
+                <p>
+                    Berdasarkan capaian tersebut, Prodi Psikologi Islam telah memperoleh <strong class="text-white">20 pengakuan kompetensi lulusan</strong> dalam tiga tahun terakhir, dengan rincian <strong class="text-white">18 pengakuan pada tingkat nasional</strong> dan <strong class="text-white">2 pengakuan pada tingkat wilayah</strong>. Capaian ini telah melampaui target minimal untuk status Terakreditasi (minimal 3 pengakuan sesuai fokus misi) dan juga melampaui target untuk status Unggul (minimal 3 pengakuan tingkat nasional atau 1 internasional). Keberagaman bidang pengakuan yang mencakup publikasi, kekayaan intelektual, pendidikan lanjutan, sertifikasi profesi, penghargaan di tempat kerja, kompetisi nasional, dan sertifikasi kompetensi tambahan menunjukkan bahwa kompetensi lulusan Prodi Psikologi Islam tidak hanya diakui oleh institusi akademik, tetapi juga oleh dunia kerja dan masyarakat luas.
+                </p>
+
+                <p>
+                    <strong class="text-gold">Rencana Tindak Lanjut</strong>
+                </p>
+
+                <p>
+                    Untuk mempertahankan dan meningkatkan capaian ini, Prodi Psikologi Islam akan terus memperkuat sistem pelacakan lulusan melalui <strong class="text-white">tracer study yang lebih terintegrasi</strong>, mendorong mahasiswa dan lulusan untuk aktif dalam kegiatan publikasi dan inovasi, serta memperluas jejaring kemitraan dengan institusi dan dunia kerja untuk membuka lebih banyak peluang pengakuan kompetensi lulusan. Selain itu, prodi akan menjadikan capaian ini sebagai umpan balik untuk perbaikan kurikulum dan penguatan kompetensi lulusan agar semakin relevan dengan kebutuhan nasional dan global.
+                </p>
+
+                <p class="text-[10px] text-slate-400 mt-2 border-t border-gold/20 pt-2">
+                    <i class="fas fa-info-circle mr-1"></i> Data ini diolah dari hasil tracer study dan pelacakan alumni 2022–2026.
+                </p>
+
+            </div>
+        </section>
+
+        <!-- ===== FOOTER ===== -->
+        <div class="mt-8 pt-4 border-t border-white/5 text-xs text-slate-500 text-center">
+            <i class="fas fa-print mr-1"></i> Terakhir diperbarui: 2026 – Prodi Psikologi Islam
+            <span class="mx-2">·</span>
+            <i class="fas fa-leaf text-gold mr-1"></i> Daun dari Pohon Pengetahuan
+        </div>
+
+    </main>
+
+    <!-- ============================================================ -->
+    <!-- JAVASCRIPT                                                   -->
+    <!-- ============================================================ -->
+    <script>
+        // ===== DATA PENGARAHAN & APRESIASI (20 ENTRI) =====
+        let apresiasiData = [
+            // ===== PUBLIKASI (4) =====
+            { nama: 'Siti Fatimah', bidang: 'Publikasi Buku "Corona dan Sebuah Pembelajaran Berharga"', lembaga: 'Penerbit (ber-ISBN)', wilayah: false, nasional: true, internasional: false, tahun: 2022, kategori: 'publikasi' },
+            { nama: 'Demisa Nurhasanah', bidang: 'Publikasi Buku "EMPPU PEMETIK DUKA"', lembaga: 'Penerbit (ber-ISBN)', wilayah: false, nasional: true, internasional: false, tahun: '-', kategori: 'publikasi' },
+            { nama: 'Antika, dkk.', bidang: 'Publikasi Buku "Sekarung Kisah di Balik Cover"', lembaga: 'Penerbit (ber-ISBN)', wilayah: false, nasional: true, internasional: false, tahun: '-', kategori: 'publikasi' },
+            // ===== JURNAL SINTA 2 (BARU) =====
+            { nama: 'Oktarizal Drianus, Diah Meitikasari, Rr. Rina Antasari, Shilpa Shetty Tri Syafitri, Siti Nuraisah', bidang: 'Publikasi Jurnal Sinta 2 "Bujang: The Social Representation of Gen Z Masculinity in Bangka"', lembaga: 'PALASTREN: Jurnal Studi Gender (Vol. 18 No. 2, 2025)', wilayah: false, nasional: true, internasional: false, tahun: 2025, kategori: 'publikasi' },
+
+            // ===== HKI (2) =====
+            { nama: 'Demisa Nurhasanah', bidang: 'Sertifikat HKI - Modul Pelatihan Motivasi Sebagai Upaya Meningkatkan Kelestarian', lembaga: 'Kementerian Hukum dan HAM RI', wilayah: false, nasional: true, internasional: false, tahun: 2025, kategori: 'hki' },
+            { nama: 'Demisa Nurhasanah', bidang: 'Sertifikat HKI - Modul Pelatihan Kampung Wisata', lembaga: 'Kementerian Hukum dan HAM RI', wilayah: false, nasional: true, internasional: false, tahun: 2025, kategori: 'hki' },
+
+            // ===== SERTIFIKASI PROFESI / S2 (4) =====
+            { nama: 'Nabiela', bidang: 'Penerimaan Program Profesi Psikolog', lembaga: 'Universitas Sumatera Utara', wilayah: false, nasional: true, internasional: false, tahun: 2026, kategori: 'sertifikasi' },
+            { nama: 'Ika Agusti', bidang: 'Magister Sains Psikologi (Penerimaan S2)', lembaga: 'Universitas Persada Indonesia YAI Jakarta', wilayah: false, nasional: true, internasional: false, tahun: 2022, kategori: 'sertifikasi' },
+            { nama: 'Siti Hafsoh', bidang: 'Magister Sains Psikologi (Penerimaan S2)', lembaga: 'Universitas Muhammadiyah Malang', wilayah: false, nasional: true, internasional: false, tahun: 2023, kategori: 'sertifikasi' },
+            { nama: 'Demisa Nurhasanah', bidang: 'Magister Sains Psikologi (Lulus S2)', lembaga: 'Universitas Ahmad Dahlan', wilayah: false, nasional: true, internasional: false, tahun: 2024, kategori: 'sertifikasi' },
+
+            // ===== PENGAKUAN DUNIA KERJA (7) =====
+            { nama: 'Mutiara Andini', bidang: 'Narasumber Puber Talk (Konseling Remaja)', lembaga: 'Mutiara Harapan Islamic School (MHIS) Bangka', wilayah: true, nasional: false, internasional: false, tahun: 2025, kategori: 'kerja' },
+            { nama: 'Mutiara Andini', bidang: 'Penghargaan Most Humble Teacher', lembaga: 'Mutiara Harapan Islamic School (MHIS)', wilayah: true, nasional: false, internasional: false, tahun: 2025, kategori: 'kerja' },
+            { nama: 'Mutiara Andini', bidang: 'Pemateri Seminar Inklusif untuk Guru', lembaga: 'Mutiara Harapan Islamic School (MHIS)', wilayah: true, nasional: false, internasional: false, tahun: 2025, kategori: 'kerja' },
+            { nama: 'Mutiara Andini', bidang: 'Penugasan sebagai Junior High Guidance Counselor (Konseling ABK)', lembaga: 'Mutiara Harapan Islamic School (MHIS) Bangka', wilayah: true, nasional: false, internasional: false, tahun: 2025, kategori: 'kerja' },
+            { nama: 'Mutiara Andini', bidang: 'Penugasan sebagai Tim Observasi Penerimaan Siswa', lembaga: 'Mutiara Harapan Islamic School (MHIS) Bangka', wilayah: true, nasional: false, internasional: false, tahun: 2025, kategori: 'kerja' },
+            { nama: 'Demisa Nurhasanah', bidang: 'Anggota Pelaksana Program Pemberdayaan Umat (PRODAMAT)', lembaga: 'Fakultas Psikologi Universitas Ahmad Dahlan', wilayah: false, nasional: true, internasional: false, tahun: 2025, kategori: 'kerja' },
+            { nama: 'Ika Agusti', bidang: 'Wakil Kepala Sekolah', lembaga: 'YPAC Pangkalpinang', wilayah: false, nasional: true, internasional: false, tahun: 2025, kategori: 'kerja' },
+
+            // ===== KOMPETISI (1) =====
+            { nama: 'Mutiara Andini', bidang: 'Medali Emas KTIH (Kompetisi Teacher Inovatif dan Hebat)', lembaga: 'STIQ (Sekolah Tinggi Ilmu Al-Quran)', wilayah: false, nasional: true, internasional: false, tahun: 2025, kategori: 'kompetisi' },
+
+            // ===== SERTIFIKASI KOMPETENSI (2) =====
+            { nama: 'Shilpa Shetty Tri Syafitri', bidang: 'Terapi Perilaku Fungsi Bahasa ABK', lembaga: 'Alinea Psychological Services & Puzzle-A', wilayah: false, nasional: true, internasional: false, tahun: 2023, kategori: 'sertifikasi_kompetensi' },
+            { nama: 'Shilpa Shetty Tri Syafitri', bidang: 'Kompetensi Montessori Sensorial at Home', lembaga: 'Jejak Jemari', wilayah: false, nasional: true, internasional: false, tahun: 2023, kategori: 'sertifikasi_kompetensi' }
+        ];
+
+        // ===== RENDER TABEL =====
+        function renderTable() {
+            const tbody = document.getElementById('tableBody');
+            const filterKategori = document.getElementById('filterKategori').value;
+            const filterTingkat = document.getElementById('filterTingkat').value;
+
+            let filtered = apresiasiData;
+
+            if (filterKategori !== 'all') {
+                filtered = filtered.filter(item => item.kategori === filterKategori);
+            }
+            if (filterTingkat !== 'all') {
+                if (filterTingkat === 'nasional') filtered = filtered.filter(item => item.nasional === true);
+                else if (filterTingkat === 'wilayah') filtered = filtered.filter(item => item.wilayah === true);
+                else if (filterTingkat === 'internasional') filtered = filtered.filter(item => item.internasional === true);
+            }
+
+            tbody.innerHTML = '';
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" class="text-center text-slate-500 py-4">Tidak ada data untuk filter ini.</td></tr>`;
+                document.getElementById('totalData').textContent = '0';
+                return;
+            }
+
+            filtered.forEach((item, index) => {
+                const tr = document.createElement('tr');
+
+                const wilayahBadge = item.wilayah ? '<span class="badge-status badge-wilayah">✓</span>' : '';
+                const nasionalBadge = item.nasional ? '<span class="badge-status badge-nasional">✓</span>' : '';
+                const internasionalBadge = item.internasional ? '<span class="badge-status badge-internasional">✓</span>' : '';
+
+                tr.innerHTML = `
+                    <td class="text-center font-mono text-gold font-bold">${index + 1}</td>
+                    <td class="text-left text-white text-xs font-medium">${item.nama}</td>
+                    <td class="text-left text-slate-300 text-xs">${item.bidang}</td>
+                    <td class="text-left text-slate-300 text-xs">${item.lembaga}</td>
+                    <td class="text-center">${wilayahBadge}</td>
+                    <td class="text-center">${nasionalBadge}</td>
+                    <td class="text-center">${internasionalBadge}</td>
+                    <td class="text-center text-slate-300 text-xs">${item.tahun}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById('totalData').textContent = filtered.length;
+        }
+
+        // ===== INIT =====
+        document.addEventListener('DOMContentLoaded', function() {
+            renderTable();
+        });
+    </script>
+
+</body>
+</html>
