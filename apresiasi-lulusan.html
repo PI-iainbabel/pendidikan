@@ -92,6 +92,16 @@
             border-color: #4F7FD8;
             transform: translateY(-2px);
         }
+        .btn-nav-lkps {
+            background: rgba(212, 175, 55, 0.08);
+            color: #D4AF37;
+            border-color: rgba(212, 175, 55, 0.15);
+        }
+        .btn-nav-lkps:hover {
+            background: rgba(212, 175, 55, 0.15);
+            border-color: #D4AF37;
+            transform: translateY(-2px);
+        }
 
         .breadcrumb {
             display: flex;
@@ -345,6 +355,12 @@
                 </div>
 
                 <div class="flex items-center gap-2 flex-wrap">
+                    <!-- ===== TOMBOL LKPS (BARU) ===== -->
+                    <a href="https://docs.google.com/spreadsheets/d/1ypXZVZ3rATjgG0O0HV0CyzOPMTjE2ncm/edit?gid=1382858193#gid=1382858193" 
+                       target="_blank" 
+                       class="btn-nav btn-nav-lkps text-xs">
+                        <i class="fas fa-file-excel"></i> LKPS
+                    </a>
                     <a href="https://drive.google.com/drive/u/1/folders/1rH36enA8aLBSwegw9VO1BupsmIGzG6a6" 
                        target="_blank" 
                        class="btn-nav btn-nav-drive text-xs">
@@ -512,7 +528,7 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                 <div>
                     <h2 class="font-heading font-bold text-xl text-white flex items-center gap-2">
-                        <i class="fas fa-list text-gold"></i> Tabel Pengajuan Kompetensi Lulusan
+                        <i class="fas fa-list text-gold"></i> Tabel Apresiasi & Pengakuan Kompetensi Lulusan
                         <span class="text-sm text-slate-400 font-normal">— Pengakuan & Apresiasi</span>
                     </h2>
                     <p class="text-xs text-slate-400 mt-0.5">Data pengakuan kompetensi lulusan 2022–2026</p>
@@ -669,7 +685,7 @@
 
                 <p>
                     <strong class="text-gold">1. Publikasi Ilmiah:</strong>
-                    Lulusan telah menghasilkan <strong class="text-white">4 publikasi</strong> yang terdiri dari 3 buku ber-ISBN dan 1 artikel jurnal nasional terakreditasi Sinta 2. Buku yang diterbitkan antara lain <em>"Corona dan Sebuah Pembelajaran Berharga"</em> (2022) oleh Siti Fatimah, <em>"EMPPU PEMETIK DUKA"</em> oleh Demisa Nurhasanah, serta <em>"Sekarung Kisah di Balik Cover"</em> oleh Antika dan kawan-kawan. Capaian publikasi jurnal Sinta 2 diperoleh melalui artikel <strong class="text-white">"Bujang: The Social Representation of Gen Z Masculinity in Bangka"</strong> yang terbit di <strong class="text-white">PALASTREN: Jurnal Studi Gender</strong> (Vol. 18 No. 2, 2025) oleh Oktarizal Drianus, Diah Meitikasari, Rr. Rina Antasari, Shilpa Shetty Tri Syafitri, dan Siti Nuraisah. Publikasi ini menunjukkan kemampuan lulusan dalam menghasilkan karya ilmiah yang diakui secara nasional.
+                    Lulusan telah menghasilkan <strong class="text-white">4 publikasi</strong> yang terdiri dari 3 buku ber-ISBN dan 1 artikel jurnal nasional terakreditasi Sinta 2. Buku yang diterbitkan antara lain <em>"Corona dan Sebuah Pembelajaran Berharga"</em> (2022) oleh Siti Fatimah, <em>"EMPPU PEMETIK DUKA"</em> oleh Demisa Nurhasanah, serta <em>"Sekarung Kisah di Balik Cover"</em> oleh Antika dan kawan-kawan. Capaian publikasi jurnal Sinta 2 diperoleh melalui artikel <strong class="text-white">"Bujang: The Social Representation of Gen Z Masculinity in Bangka"</strong> yang terbit di <strong class="text-white">PALASTREN: Jurnal Studi Gender</strong> (Vol. 18 No. 2, 2025) oleh <strong class="text-white">Shilpa Shetty Tri Syafitri dan Siti Nuraisah</strong> bersama dosen pembimbing. Publikasi ini menunjukkan kemampuan lulusan dalam menghasilkan karya ilmiah yang diakui secara nasional.
                 </p>
 
                 <p>
@@ -743,8 +759,8 @@
             { nama: 'Siti Fatimah', bidang: 'Publikasi Buku "Corona dan Sebuah Pembelajaran Berharga"', lembaga: 'Penerbit (ber-ISBN)', wilayah: false, nasional: true, internasional: false, tahun: 2022, kategori: 'publikasi' },
             { nama: 'Demisa Nurhasanah', bidang: 'Publikasi Buku "EMPPU PEMETIK DUKA"', lembaga: 'Penerbit (ber-ISBN)', wilayah: false, nasional: true, internasional: false, tahun: '-', kategori: 'publikasi' },
             { nama: 'Antika, dkk.', bidang: 'Publikasi Buku "Sekarung Kisah di Balik Cover"', lembaga: 'Penerbit (ber-ISBN)', wilayah: false, nasional: true, internasional: false, tahun: '-', kategori: 'publikasi' },
-            // ===== JURNAL SINTA 2 (BARU) =====
-            { nama: 'Oktarizal Drianus, Diah Meitikasari, Rr. Rina Antasari, Shilpa Shetty Tri Syafitri, Siti Nuraisah', bidang: 'Publikasi Jurnal Sinta 2 "Bujang: The Social Representation of Gen Z Masculinity in Bangka"', lembaga: 'PALASTREN: Jurnal Studi Gender (Vol. 18 No. 2, 2025)', wilayah: false, nasional: true, internasional: false, tahun: 2025, kategori: 'publikasi' },
+            // ===== JURNAL SINTA 2 (DIEDIT: hanya Shilpa Shetty Tri Syafitri, Siti Nuraisah) =====
+            { nama: 'Shilpa Shetty Tri Syafitri, Siti Nuraisah', bidang: 'Publikasi Jurnal Sinta 2 "Bujang: The Social Representation of Gen Z Masculinity in Bangka"', lembaga: 'PALASTREN: Jurnal Studi Gender (Vol. 18 No. 2, 2025)', wilayah: false, nasional: true, internasional: false, tahun: 2025, kategori: 'publikasi' },
 
             // ===== HKI (2) =====
             { nama: 'Demisa Nurhasanah', bidang: 'Sertifikat HKI - Modul Pelatihan Motivasi Sebagai Upaya Meningkatkan Kelestarian', lembaga: 'Kementerian Hukum dan HAM RI', wilayah: false, nasional: true, internasional: false, tahun: 2025, kategori: 'hki' },
